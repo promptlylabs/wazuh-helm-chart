@@ -1,0 +1,51 @@
+apiVersion: v1
+entries:
+  wazuh:
+  - annotations:
+      artifacthub.io/category: security
+      artifacthub.io/links: |
+        - name: application source
+          url: https://github.com/wazuh/wazuh
+        - name: kustomize source
+          url: https://github.com/wazuh/wazuh-kubernetes
+      artifacthub.io/prerelease: "true"
+      artifacthub.io/screenshots: |-
+        - title: Home Page
+          url: https://promptlylabs.github.io/wazuh-helm-chart/images/dashboard.png
+        - title: Agent Deployment
+          url: https://promptlylabs.github.io/wazuh-helm-chart/images/agent-deploy.png
+        - title: Threat Hunting
+          url: https://promptlylabs.github.io/wazuh-helm-chart/images/threat-hunting.png
+    apiVersion: v2
+    appVersion: 4.10.1
+    created: "2025-02-04T16:28:38.687933813Z"
+    dependencies:
+    - condition: cert-manager.enabled
+      name: cert-manager
+      repository: https://charts.jetstack.io
+      version: 1.16.3
+    description: Wazuh is a free and open source security platform that unifies XDR
+      and SIEM protection for endpoints and cloud workloads.
+    digest: 3a07d1787215c58887f9c89a157abac5fde4cc5a976c1aafd5a660e86a235574
+    home: https://wazuh.com/
+    icon: https://promptlylabs.github.io/wazuh-helm-chart/images/icon.png
+    keywords:
+    - security
+    - information
+    - threat
+    - management
+    - wazuh
+    - opendistro
+    - elasticsearch
+    maintainers:
+    - email: andre.gomes@promptlyhealth.com
+      name: Dani
+      url: https://github.com/Ca-moes
+    name: wazuh
+    sources:
+    - https://github.com/promptlylabs/wazuh-helm-chart
+    type: application
+    urls:
+    - https://github.com/promptlylabs/wazuh-helm-chart/releases/download/wazuh-0.0.1/wazuh-0.0.1.tgz
+    version: 0.0.1
+generated: "2025-02-04T16:28:38.687944683Z"
