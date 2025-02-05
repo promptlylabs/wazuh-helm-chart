@@ -4,6 +4,8 @@ cert-manager:
 nameOverride: null
 fullnameOverride: null
 
+imagePullSecrets: []
+
 indexer:
   replicas: 3
 
@@ -21,9 +23,6 @@ indexer:
     repository: wazuh/wazuh-indexer
     tag: "4.10.1"
     pullPolicy: IfNotPresent
-    imagePullSecrets:
-      enabled: false
-      secret: {}
 
   resources:
     requests:
@@ -31,6 +30,10 @@ indexer:
       memory: 1Gi
     limits:
       memory: 2Gi
+  
+  pdb:
+    enabled: false
+    maxUnavailable: 1
 
   # Will be implemented on Wazuh v5.0.0
   # readinessProbe: {}
@@ -81,7 +84,7 @@ indexer:
 
 # Kibana for elasticsearch with Wazuh plugins pre-installed
 dashboard:
-  replicas: 1
+  replicas: 2
 
   annotations: {}
 
@@ -89,7 +92,6 @@ dashboard:
     repository: wazuh/wazuh-dashboard
     tag: "4.10.1"
     pullPolicy: IfNotPresent
-    updateStrategy: OnDelete
   
   resources:
     limits:
@@ -97,6 +99,10 @@ dashboard:
     requests:
       cpu: 500m
       memory: 512Mi
+  
+  pdb:
+    enabled: false
+    maxUnavailable: 1
   
   # Will be implemented on Wazuh v5.0.0
   # readinessProbe: {}
@@ -222,6 +228,10 @@ wazuh:
       requests:
         cpu: 500m
         memory: 512Mi
+    
+    pdb:
+      enabled: false
+      maxUnavailable: 1
     
     networkPolicy:
       enabled: true

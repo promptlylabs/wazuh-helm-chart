@@ -1,6 +1,4 @@
-#TODO
-# - Make it optional
-# - Analyze traffic and add default rules
+{{- if .Values.wazuh.worker.pdb.enabled }}
 kind: PodDisruptionBudget
 apiVersion: policy/v1
 metadata:
@@ -10,4 +8,7 @@ spec:
     matchLabels:
       app: {{ include "wazuh.fullname" . }}-manager
       node-type: worker
-  minAvailable: 1
+  {{- with .Values.wazuh.worker.pdb.maxUnavailable }}
+  maxUnavailable: {{ . }}
+  {{- end }}
+{{- end }}
