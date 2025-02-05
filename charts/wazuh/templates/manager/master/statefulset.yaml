@@ -6,7 +6,9 @@ metadata:
     app: {{ include "wazuh.fullname" . }}-manager
     node-type: master
   annotations:
+    {{- if .Values.wazuh.master.annotations -}}
     {{- toYaml .Values.wazuh.master.annotations | nindent 4 }}
+    {{- end }}
 spec:
   replicas: 1
   selector:
@@ -24,10 +26,9 @@ spec:
         node-type: master
       name: wazuh-manager-master
       annotations:
+        checksum/config: {{ (include (print .Template.BasePath "/manager/configmap.yaml") . | cat (include (print .Template.BasePath "/manager/secret-api-cred.yaml") . ) | cat (include (print .Template.BasePath "/manager/secret-authd-pass.yaml") . ) | cat (include (print .Template.BasePath "/manager/secret-cluster-key.yaml") . ) | sha256sum) }}
+        {{- if .Values.wazuh.master.annotations -}}
         {{- toYaml .Values.wazuh.master.annotations | nindent 8 }}
-        {{- if .Values.reloader.enabled -}}
-        secret.reloader.stakater.com/reload: "wazuh-authd-pass,indexer-certs"
-        configmap.reloader.stakater.com/reload: "{{ template "wazuh.fullname" . }}-master-config"
         {{- end }}
     spec:
       volumes:
@@ -45,7 +46,7 @@ spec:
           name: result-config
       initContainers:
         - name: update-index
-          image: alpine
+          image: busybox:stable
           command: 
             - 'sh'
             - '-c'
@@ -134,6 +135,11 @@ spec:
               name: cluster
             - containerPort: {{ .Values.wazuh.master.service.ports.api }}
               name: api
+          {{- /*
+          # Will be implemented on Wazuh v5.0.0
+          readinessProbe:
+            {{- toYaml .Values.wazuh.readinessProbe | nindent 12 }}
+          */}}
           env:
             - name: INDEXER_URL
               value: "https://indexer:{{ .Values.indexer.service.httpPort }}"

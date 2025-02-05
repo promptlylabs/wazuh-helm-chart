@@ -5,7 +5,9 @@ metadata:
   labels:
     app: {{ include "wazuh.fullname" . }}-indexer
   annotations:
+    {{- if .Values.indexer.annotations -}}
     {{- toYaml .Values.indexer.annotations | nindent 4 }}
+    {{- end }}
 spec:
   serviceName: {{ include "wazuh.fullname" . }}-indexer-nodes
   replicas: {{ .Values.indexer.replicas }}
@@ -19,7 +21,10 @@ spec:
       labels:
         app: {{ include "wazuh.fullname" . }}-indexer
       annotations:
+        checksum/config: {{ (include (print .Template.BasePath "/indexer/configmap.yaml") . | cat (include (print .Template.BasePath "/indexer/secret.yaml") . ) | sha256sum) }}
+        {{- if .Values.indexer.annotations -}}
         {{- toYaml .Values.indexer.annotations | nindent 8 }}
+        {{- end }}
     spec:
       volumes:
       - name: admin-certs
@@ -33,24 +38,27 @@ spec:
         name: indexer-conf
       initContainers:
         - name: volume-mount-hack
-          image: busybox
+          image: busybox:stable
           command:
           - sh
           - -c
           - chown -R 1000:1000 /var/lib/wazuh-indexer
           resources:
             {{- toYaml .Values.indexer.initContainers.volumeMountHack.resources | nindent 12 }}
+          securityContext:
+            {{- toYaml .Values.indexer.initContainers.volumeMountHack.securityContext | nindent 12 }}
           volumeMounts:
             - mountPath: /var/lib/wazuh-indexer
               name: wazuh-indexer
+        # https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks-max-map-count.html
         - name: increase-the-vm-max-map-count
-          image: busybox
+          image: busybox:stable
           command:
             - sysctl
             - -w
             - vm.max_map_count=262144
           securityContext:
-            privileged: true
+            {{- toYaml .Values.indexer.initContainers.increaseTheVmMaxMapCount.securityContext | nindent 12 }}
           resources:
             {{- toYaml .Values.indexer.initContainers.increaseTheVmMaxMapCount.resources | nindent 12 }}
       containers:
@@ -77,6 +85,8 @@ spec:
               value: {{ .Values.indexer.env.DISABLE_INSTALL_DEMO_CONFIG | quote }}
           resources:
             {{- toYaml .Values.indexer.resources | nindent 12 }}
+          securityContext:
+            {{- toYaml .Values.dashboard.securityContext | nindent 12 }}
           volumeMounts:
             # PVC
             - mountPath: /var/lib/wazuh-indexer
@@ -116,6 +126,11 @@ spec:
               name: indexer-rest
             - containerPort: {{ .Values.indexer.service.nodes }}
               name: indexer-nodes
+          {{- /*
+          # Will be implemented on Wazuh v5.0.0
+          readinessProbe:
+            {{- toYaml .Values.indexer.readinessProbe | nindent 12 }}
+          */}}
   volumeClaimTemplates:
     - metadata:
         name: wazuh-indexer
