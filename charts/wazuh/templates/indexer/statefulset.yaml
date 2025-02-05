@@ -4,10 +4,10 @@ metadata:
   name: {{ include "wazuh.fullname" . }}-indexer
   labels:
     app: {{ include "wazuh.fullname" . }}-indexer
+  {{- with .Values.indexer.annotations }}
   annotations:
-    {{- if .Values.indexer.annotations -}}
-    {{- toYaml .Values.indexer.annotations | nindent 4 }}
-    {{- end }}
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   serviceName: {{ include "wazuh.fullname" . }}-indexer-nodes
   replicas: {{ .Values.indexer.replicas }}
@@ -22,8 +22,8 @@ spec:
         app: {{ include "wazuh.fullname" . }}-indexer
       annotations:
         checksum/config: {{ (include (print .Template.BasePath "/indexer/configmap.yaml") . | cat (include (print .Template.BasePath "/indexer/secret.yaml") . ) | sha256sum) }}
-        {{- if .Values.indexer.annotations -}}
-        {{- toYaml .Values.indexer.annotations | nindent 8 }}
+        {{- with .Values.indexer.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
         {{- end }}
     spec:
       volumes:
@@ -90,7 +90,7 @@ spec:
           resources:
             {{- toYaml .Values.indexer.resources | nindent 12 }}
           securityContext:
-            {{- toYaml .Values.dashboard.securityContext | nindent 12 }}
+            {{- toYaml .Values.indexer.securityContext | nindent 12 }}
           volumeMounts:
             # PVC
             - mountPath: /var/lib/wazuh-indexer

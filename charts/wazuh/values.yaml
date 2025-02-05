@@ -10,6 +10,7 @@ indexer:
   replicas: 3
 
   annotations: {}
+  podAnnotations: {}
 
   service:
     annotations: {}
@@ -74,8 +75,12 @@ indexer:
     NETWORK_HOST: "0.0.0.0"
     DISABLE_INSTALL_DEMO_CONFIG: "true"
 
-  storageSize: 50Gi
+  # If defined, storageClassName: <storageClass>
+  # If set to "-", storageClassName: "", which disables dynamic provisioning
+  # If undefined (the default) or set to null, no storageClassName spec is
+  #   set, choosing the default provisioner.
   storageClass: null
+  storageSize: 50Gi
 
   cred:
     existingSecret: ""
@@ -87,6 +92,7 @@ dashboard:
   replicas: 2
 
   annotations: {}
+  podAnnotations: {}
 
   images:
     repository: wazuh/wazuh-dashboard
@@ -133,15 +139,21 @@ dashboard:
   
   ingress:
     enabled: false
+    ingressClassName: ""
+    annotations: {}
+    labels: {}
+    hosts:
+      - host: wazuh.example.com
+        paths:
+          - path: /
+          # pathType: Prefix
     tls: []
     # - secretName: wazuh-tls
     #   hosts:
     #     - wazuh.example.com
-    annotations: {}
-    host: "wazuh.example.com"
+    
 
 wazuh:
-  syslog_enable: true
   key: "c98b62a9b6169ac5f67dae55ae4a9088"
   images:
     repository: wazuh/wazuh-manager
@@ -181,6 +193,7 @@ wazuh:
 
   master:
     annotations: {}
+    podAnnotations: {}
 
     service:
       type: ClusterIP
@@ -199,10 +212,6 @@ wazuh:
     networkPolicy:
       enabled: true
     
-    # If defined, storageClassName: <storageClass>
-    # If set to "-", storageClassName: "", which disables dynamic provisioning
-    # If undefined (the default) or set to null, no storageClassName spec is
-    #   set, choosing the default provisioner.
     storageClass: null
     storageSize: 50Gi
 
@@ -215,6 +224,7 @@ wazuh:
     replicas: 2
 
     annotations: {}
+    podAnnotations: {}
 
     service:
       type: ClusterIP

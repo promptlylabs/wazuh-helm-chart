@@ -4,10 +4,10 @@ metadata:
   name: {{ include "wazuh.fullname" . }}-dashboard
   labels:
     app: {{ include "wazuh.fullname" . }}-dashboard
+  {{ with .Values.dashboard.annotations}}
   annotations:
-    {{- if .Values.dashboard.annotations -}}
-    {{- toYaml .Values.dashboard.annotations | nindent 4 }}
-    {{- end }}
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   replicas: {{ .Values.dashboard.replicas }}
   selector:
@@ -19,8 +19,8 @@ spec:
         app: {{ include "wazuh.fullname" . }}-dashboard
       annotations:
         checksum/config: {{ (include (print .Template.BasePath "/dashboard/configmap.yaml") . | cat (include (print .Template.BasePath "/dashboard/secret.yaml") .) | sha256sum) }}
-        {{- if .Values.dashboard.annotations -}}
-        {{- toYaml .Values.dashboard.annotations | nindent 8 }}
+        {{ with .Values.dashboard.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
         {{- end }}
       name: {{ include "wazuh.fullname" . }}-dashboard
     spec:
