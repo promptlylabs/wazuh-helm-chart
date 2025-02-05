@@ -4,7 +4,7 @@ metadata:
   name: {{ include "wazuh.fullname" . }}-dashboard
   labels:
     app: {{ include "wazuh.fullname" . }}-dashboard
-  {{ with .Values.dashboard.annotations}}
+  {{- with .Values.dashboard.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
@@ -19,7 +19,7 @@ spec:
         app: {{ include "wazuh.fullname" . }}-dashboard
       annotations:
         checksum/config: {{ (include (print .Template.BasePath "/dashboard/configmap.yaml") . | cat (include (print .Template.BasePath "/dashboard/secret.yaml") .) | sha256sum) }}
-        {{ with .Values.dashboard.podAnnotations }}
+        {{- with .Values.dashboard.podAnnotations }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
       name: {{ include "wazuh.fullname" . }}-dashboard
@@ -31,7 +31,7 @@ spec:
         - name: dashboard-certs
           secret:
             secretName: dashboard-tls
-      {{- with .Values.imagePullSecrets -}}
+      {{ with .Values.imagePullSecrets -}}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
