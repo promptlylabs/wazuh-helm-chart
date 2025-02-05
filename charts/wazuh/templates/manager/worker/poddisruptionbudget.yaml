@@ -1,0 +1,13 @@
+#TODO
+# - Make it optional
+# - Analyze traffic and add default rules
+kind: PodDisruptionBudget
+apiVersion: policy/v1
+metadata:
+  name: {{ include "wazuh.fullname" . }}-manager-worker
+spec:
+  selector:
+    matchLabels:
+      app: {{ include "wazuh.fullname" . }}-manager
+      node-type: worker
+  minAvailable: 1
