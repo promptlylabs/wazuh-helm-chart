@@ -1,6 +1,4 @@
-#TODO
-# - Make it optional
-# - Analyze traffic and add default rules
+{{- if .Values.indexer.pdb.enabled }}
 kind: PodDisruptionBudget
 apiVersion: policy/v1
 metadata:
@@ -9,4 +7,7 @@ spec:
   selector:
     matchLabels:
       app: {{ include "wazuh.fullname" . }}-indexer
-  minAvailable: 1
+  {{- with .Values.indexer.pdb.maxUnavailable }}
+  maxUnavailable: {{ . }}
+  {{- end }}
+{{- end }}
