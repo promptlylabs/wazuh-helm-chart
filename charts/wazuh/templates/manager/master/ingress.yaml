@@ -1,0 +1,49 @@
+{{- if .Values.wazuh.master.ingress.agentRegistration.enabled -}}
+apiVersion:  networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "wazuh.fullname" . }}-agent-registration
+  labels:
+    app: {{ include "wazuh.fullname" . }}-manager
+    node-type: master
+    {{- range $labelKey, $labelValue := .Values.wazuh.master.ingress.agentRegistration.labels }}
+    {{ $labelKey }}: {{ $labelValue | toYaml }}
+    {{- end }}
+  {{- with .Values.wazuh.master.ingress.agentRegistration.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  {{- if .Values.wazuh.master.ingress.agentRegistration.ingressClassName }}
+  ingressClassName: {{ .Values.wazuh.master.ingress.agentRegistration.ingressClassName }}
+  {{- end -}}
+  {{- if .Values.wazuh.master.ingress.agentRegistration.tls }}
+  tls:
+    {{- range .Values.wazuh.master.ingress.agentRegistration.tls }}
+    - hosts:
+        {{- range .hosts }}
+        - {{ tpl . $ | quote }}
+        {{- end }}
+      {{- with .secretName }}
+      secretName: {{ . }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+  rules:
+    {{- range .Values.wazuh.master.ingress.agentRegistration.hosts }}
+    - host: {{ tpl .host $ | quote }}
+      http:
+        paths:
+          {{- range .paths }}
+          - path: {{ .path }}
+            {{- if .pathType }}
+            pathType: {{ .pathType }}
+            {{- end }}
+            backend:
+              service:
+                name: wazuh
+                port:
+                  number: {{ $.Values.wazuh.master.service.ports.registration }}
+          {{- end }}
+    {{- end }}
+{{- end -}}

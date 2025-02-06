@@ -6,6 +6,72 @@ fullnameOverride: null
 
 imagePullSecrets: []
 
+# Kibana for elasticsearch with Wazuh plugins pre-installed
+dashboard:
+  replicas: 2
+
+  annotations: {}
+  podAnnotations: {}
+
+  images:
+    repository: wazuh/wazuh-dashboard
+    tag: "4.10.1"
+    pullPolicy: IfNotPresent
+  
+  resources:
+    limits:
+      memory: 1Gi
+    requests:
+      cpu: 500m
+      memory: 512Mi
+  
+  pdb:
+    enabled: false
+    maxUnavailable: 1
+  
+  # Will be implemented on Wazuh v5.0.0
+  # readinessProbe: {}
+
+  securityContext: {}
+
+  networkPolicy:
+    enabled: true
+
+  # with this you will be able to access kibana on http port instead of https
+  # if you use Ambassador edgestack this is necessary becasue
+  # with `true` route will close unexpectedly
+  # when accessing via ambassador external url
+  enable_ssl: false
+
+  service:
+    annotations: {}
+    httpPort: 5601
+    type: ClusterIP
+  
+  cred:
+    existingSecret: ""
+    username: "kibanaserver"
+    password: "kibanaserver"
+  
+  config: |
+    {{- include "wazuh.dashboard.config" . | indent 2 -}}
+  
+  ingress:
+    enabled: false
+    ingressClassName: ""
+    annotations: {}
+    labels: {}
+    hosts:
+      - host: wazuh.example.com
+        paths:
+          - path: /
+          # pathType: Prefix
+    tls: []
+    # - secretName: wazuh-tls
+    #   hosts:
+    #     - wazuh.example.com
+
+
 indexer:
   replicas: 3
 
@@ -85,73 +151,8 @@ indexer:
   cred:
     existingSecret: ""
     username: "admin"
-    password: "SecretPassword"
+    password: "SecretPassword"    
 
-# Kibana for elasticsearch with Wazuh plugins pre-installed
-dashboard:
-  replicas: 2
-
-  annotations: {}
-  podAnnotations: {}
-
-  images:
-    repository: wazuh/wazuh-dashboard
-    tag: "4.10.1"
-    pullPolicy: IfNotPresent
-  
-  resources:
-    limits:
-      memory: 1Gi
-    requests:
-      cpu: 500m
-      memory: 512Mi
-  
-  pdb:
-    enabled: false
-    maxUnavailable: 1
-  
-  # Will be implemented on Wazuh v5.0.0
-  # readinessProbe: {}
-
-  securityContext: {}
-
-  networkPolicy:
-    enabled: true
-
-  # with this you will be able to access kibana on http port instead of https
-  # if you use Ambassador edgestack this is necessary becasue
-  # with `true` route will close unexpectedly
-  # when accessing via ambassador external url
-  enable_ssl: false
-
-  service:
-    annotations: {}
-    httpPort: 5601
-    type: ClusterIP
-  
-  cred:
-    existingSecret: ""
-    username: "kibanaserver"
-    password: "kibanaserver"
-  
-  config: |
-    {{- include "wazuh.dashboard.config" . | indent 2 -}}
-  
-  ingress:
-    enabled: false
-    ingressClassName: ""
-    annotations: {}
-    labels: {}
-    hosts:
-      - host: wazuh.example.com
-        paths:
-          - path: /
-          # pathType: Prefix
-    tls: []
-    # - secretName: wazuh-tls
-    #   hosts:
-    #     - wazuh.example.com
-    
 
 wazuh:
   key: "c98b62a9b6169ac5f67dae55ae4a9088"
@@ -215,6 +216,22 @@ wazuh:
     storageClass: null
     storageSize: 50Gi
 
+    ingress:
+      agentRegistration:
+        enabled: false
+        ingressClassName: ""
+        annotations: {}
+        labels: {}
+        hosts:
+          - host: wazuh-agent-register.example.com
+            paths:
+              - path: /
+              # pathType: Prefix
+        tls: []
+        # - secretName: wazuh-tls
+        #   hosts:
+        #     - wazuh.example.com
+
     conf: |
       {{- include "wazuh.master.conf" . | indent 2 -}}
     # To be appended to the master.conf
@@ -248,6 +265,21 @@ wazuh:
 
     storageClass: null
     storageSize: 50Gi
+
+    ingress:
+      enabled: false
+      ingressClassName: ""
+      annotations: {}
+      labels: {}
+      hosts:
+        - host: wazuh-agent-events.example.com
+          paths:
+            - path: /
+            # pathType: Prefix
+      tls: []
+      # - secretName: wazuh-tls
+      #   hosts:
+      #     - wazuh.example.com
     
     conf: |
       {{- include "wazuh.worker.conf" . | indent 2 -}}

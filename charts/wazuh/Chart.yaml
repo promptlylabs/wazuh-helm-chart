@@ -3,7 +3,7 @@ name: wazuh
 description: Wazuh is a free and open source security platform that unifies XDR and SIEM protection for endpoints and cloud workloads.
 type: application
 appVersion: 4.10.1
-version: 0.0.2
+version: 0.0.3
 home: https://wazuh.com/
 sources:
   - https://github.com/promptlylabs/wazuh-helm-chart
@@ -29,15 +29,7 @@ annotations:
   artifacthub.io/category: security
   artifacthub.io/changes: |
     - kind: added
-      description: Checksum on Deployments and StatefulSets for Pod restarts after config changes
-    - kind: added
-      description: PodDisruptionBudgets
-    - kind: added
-      description: NetworkPolicies with default rules
-    - kind: changed
-      description: initContainer images to busybox:stable
-    - kind: changed
-      description: Annotations and Pod annotations separated
+      description: Ingresses for Agent registration and communication
   artifacthub.io/links: |
     - name: application source
       url: https://github.com/wazuh/wazuh
