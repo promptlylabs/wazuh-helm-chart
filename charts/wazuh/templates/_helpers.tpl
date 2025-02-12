@@ -384,6 +384,19 @@ uiSettings.overrides.defaultRoute: /app/wz-home
 </ossec_config>
 {{- end }}
 
+{{- define "wazuh.master.local_internal_options" }}
+# local_internal_options.conf
+#
+# This file should be handled with care. It contains
+# run time modifications that can affect the use
+# of OSSEC. Only change it if you know what you
+# are doing. Look first at ossec.conf
+# for most of the things you want to change.
+#
+# This file will not be overwritten during upgrades.
+vulnerability-detection.disable_scan_manager=0
+{{- end }}
+
 {{/* Snippet for the configuration file used by wazuh worker */}}
 {{- define "wazuh.worker.conf" }}
 <!--
@@ -733,7 +746,20 @@ uiSettings.overrides.defaultRoute: /app/wz-home
 </ossec_config>
 {{- end }}
 
-{{- define "wazuh.indexer.opensearchConfig"}}
+{{- define "wazuh.worker.local_internal_options" }}
+# local_internal_options.conf
+#
+# This file should be handled with care. It contains
+# run time modifications that can affect the use
+# of OSSEC. Only change it if you know what you
+# are doing. Look first at ossec.conf
+# for most of the things you want to change.
+#
+# This file will not be overwritten during upgrades.
+vulnerability-detection.disable_scan_manager=0
+{{- end }}
+
+{{- define "wazuh.indexer.opensearchConfig" }}
 cluster.name: ${CLUSTER_NAME}
 node.name: ${NODE_NAME}
 network.host: ${NETWORK_HOST}
