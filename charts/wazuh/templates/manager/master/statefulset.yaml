@@ -42,8 +42,8 @@ spec:
         - name: wazuh-authd-pass
           secret:
             secretName: wazuh-authd-pass
-        - emptyDir: {}
-          name: result-config
+        - name: result-config
+          emptyDir: {}
       {{ with .Values.imagePullSecrets -}}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -80,6 +80,10 @@ spec:
             # Wazuh Config
             - mountPath: /wazuh-config-mount/etc/
               name: result-config
+            - mountPath: /var/ossec/etc/local_internal_options.conf
+              name: config
+              readOnly: true
+              subPath: master_local_internal_options.conf
             # Certs
             - mountPath: /etc/ssl/root-ca.pem
               name: filebeat-certs

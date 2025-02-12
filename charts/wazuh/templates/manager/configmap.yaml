@@ -11,5 +11,9 @@ data:
     sed -i "s/___INDEX___/$node_index/g" /wazuh-config-mount/etc/ossec.conf
   master.conf: |
     {{- tpl .Values.wazuh.master.conf . | indent 2 }}
+  master_local_internal_options.conf: |
+    {{- tpl .Values.wazuh.master.localInternalOptions . | indent 2 }}
   worker.conf: |
     {{- tpl .Values.wazuh.worker.conf . | indent 2 }}
+  worker_local_internal_options.conf: |
+    {{- tpl .Values.wazuh.worker.localInternalOptions . | indent 2 }}

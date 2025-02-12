@@ -236,6 +236,8 @@ wazuh:
       {{- include "wazuh.master.conf" . | indent 2 -}}
     # To be appended to the master.conf
     extraConf: ""
+    localInternalOptions: |
+      {{- include "wazuh.master.local_internal_options" . | indent 2 -}}
 
   worker:
     replicas: 2
@@ -285,3 +287,5 @@ wazuh:
       {{- include "wazuh.worker.conf" . | indent 2 -}}
     # To be appended to the worker.conf
     extraConf: ""
+    localInternalOptions: |
+      {{- include "wazuh.worker.local_internal_options" . | indent 2 -}}
