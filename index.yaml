@@ -5,6 +5,56 @@ entries:
       artifacthub.io/category: security
       artifacthub.io/changes: |
         - kind: added
+          description: Internal Options for Wazuh can now be configured
+      artifacthub.io/links: |
+        - name: application source
+          url: https://github.com/wazuh/wazuh
+        - name: kustomize source
+          url: https://github.com/wazuh/wazuh-kubernetes
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/screenshots: |-
+        - title: Home Page
+          url: https://promptlylabs.github.io/wazuh-helm-chart/images/dashboard.png
+        - title: Agent Deployment
+          url: https://promptlylabs.github.io/wazuh-helm-chart/images/agent-deploy.png
+        - title: Threat Hunting
+          url: https://promptlylabs.github.io/wazuh-helm-chart/images/threat-hunting.png
+    apiVersion: v2
+    appVersion: 4.10.1
+    created: "2025-02-14T09:18:17.482856569Z"
+    dependencies:
+    - condition: cert-manager.enabled
+      name: cert-manager
+      repository: https://charts.jetstack.io
+      version: 1.17.0
+    description: Wazuh is a free and open source security platform that unifies XDR
+      and SIEM protection for endpoints and cloud workloads.
+    digest: fc0f027b5dfaf7f08dccf10f7e6ce2f4c49c55aa658f4b843694503c1725a8a9
+    home: https://wazuh.com/
+    icon: https://promptlylabs.github.io/wazuh-helm-chart/images/icon.png
+    keywords:
+    - security
+    - information
+    - threat
+    - management
+    - wazuh
+    - opendistro
+    - elasticsearch
+    maintainers:
+    - email: andre.gomes@promptlyhealth.com
+      name: Dani
+      url: https://github.com/Ca-moes
+    name: wazuh
+    sources:
+    - https://github.com/promptlylabs/wazuh-helm-chart
+    type: application
+    urls:
+    - https://github.com/promptlylabs/wazuh-helm-chart/releases/download/wazuh-0.0.4/wazuh-0.0.4.tgz
+    version: 0.0.4
+  - annotations:
+      artifacthub.io/category: security
+      artifacthub.io/changes: |
+        - kind: added
           description: Ingresses for Agent registration and communication
       artifacthub.io/links: |
         - name: application source
@@ -156,4 +206,4 @@ entries:
     urls:
     - https://github.com/promptlylabs/wazuh-helm-chart/releases/download/wazuh-0.0.1/wazuh-0.0.1.tgz
     version: 0.0.1
-generated: "2025-02-06T15:16:53.583957246Z"
+generated: "2025-02-14T09:18:17.482876757Z"
