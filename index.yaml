@@ -4,6 +4,56 @@ entries:
   - annotations:
       artifacthub.io/category: security
       artifacthub.io/changes: |
+        - kind: fixed
+          description: Indexer host URL on Manager configuration file - removed quotation marks. Vulnerability Detection page is now working
+      artifacthub.io/links: |
+        - name: application source
+          url: https://github.com/wazuh/wazuh
+        - name: kustomize source
+          url: https://github.com/wazuh/wazuh-kubernetes
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/screenshots: |-
+        - title: Home Page
+          url: https://promptlylabs.github.io/wazuh-helm-chart/images/dashboard.png
+        - title: Agent Deployment
+          url: https://promptlylabs.github.io/wazuh-helm-chart/images/agent-deploy.png
+        - title: Threat Hunting
+          url: https://promptlylabs.github.io/wazuh-helm-chart/images/threat-hunting.png
+    apiVersion: v2
+    appVersion: 4.10.1
+    created: "2025-02-17T10:48:18.915141149Z"
+    dependencies:
+    - condition: cert-manager.enabled
+      name: cert-manager
+      repository: https://charts.jetstack.io
+      version: 1.17.0
+    description: Wazuh is a free and open source security platform that unifies XDR
+      and SIEM protection for endpoints and cloud workloads.
+    digest: 91982f6412df0e6aa0178a0cc4df8fef5734c11c08bafb3dfb2b8abcb3dc30af
+    home: https://wazuh.com/
+    icon: https://promptlylabs.github.io/wazuh-helm-chart/images/icon.png
+    keywords:
+    - security
+    - information
+    - threat
+    - management
+    - wazuh
+    - opendistro
+    - elasticsearch
+    maintainers:
+    - email: andre.gomes@promptlyhealth.com
+      name: Dani
+      url: https://github.com/Ca-moes
+    name: wazuh
+    sources:
+    - https://github.com/promptlylabs/wazuh-helm-chart
+    type: application
+    urls:
+    - https://github.com/promptlylabs/wazuh-helm-chart/releases/download/wazuh-0.0.5/wazuh-0.0.5.tgz
+    version: 0.0.5
+  - annotations:
+      artifacthub.io/category: security
+      artifacthub.io/changes: |
         - kind: added
           description: Internal Options for Wazuh can now be configured
       artifacthub.io/links: |
@@ -206,4 +256,4 @@ entries:
     urls:
     - https://github.com/promptlylabs/wazuh-helm-chart/releases/download/wazuh-0.0.1/wazuh-0.0.1.tgz
     version: 0.0.1
-generated: "2025-02-14T09:18:17.482876757Z"
+generated: "2025-02-17T10:48:18.915155917Z"
