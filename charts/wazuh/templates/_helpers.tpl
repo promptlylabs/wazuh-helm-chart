@@ -72,7 +72,7 @@ uiSettings.overrides.defaultRoute: /app/wz-home
 
   <!-- Choose between "plain", "json", or "plain,json" for the format of internal logs -->
   <logging>
-    <log_format>plain</log_format>
+    <log_format>json</log_format>
   </logging>
 
   <remote>
@@ -154,7 +154,7 @@ uiSettings.overrides.defaultRoute: /app/wz-home
   <indexer>
     <enabled>yes</enabled>
     <hosts>
-      <host>"https://indexer:{{ .Values.indexer.service.httpPort }}"</host>
+      <host>https://indexer:{{ .Values.indexer.service.httpPort }}</host>
     </hosts>
     <ssl>
       <certificate_authorities>
@@ -431,7 +431,7 @@ vulnerability-detection.disable_scan_manager=0
 
   <!-- Choose between "plain", "json", or "plain,json" for the format of internal logs -->
   <logging>
-    <log_format>plain</log_format>
+    <log_format>json</log_format>
   </logging>
 
   <remote>
@@ -513,7 +513,7 @@ vulnerability-detection.disable_scan_manager=0
   <indexer>
     <enabled>yes</enabled>
     <hosts>
-      <host>"https://indexer:{{ .Values.indexer.service.httpPort }}"</host>
+      <host>https://indexer:{{ .Values.indexer.service.httpPort }}</host>
     </hosts>
     <ssl>
       <certificate_authorities>
