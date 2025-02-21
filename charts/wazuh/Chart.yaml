@@ -2,8 +2,8 @@ apiVersion: v2
 name: wazuh
 description: Wazuh is a free and open source security platform that unifies XDR and SIEM protection for endpoints and cloud workloads.
 type: application
-appVersion: 4.10.1
-version: 0.0.5
+appVersion: 4.11.0
+version: 0.0.6
 home: https://wazuh.com/
 sources:
   - https://github.com/promptlylabs/wazuh-helm-chart
@@ -22,14 +22,15 @@ keywords:
   - elasticsearch
 dependencies:
   - name: cert-manager
-    version: 1.17.0
+    version: 1.17.1
     repository: https://charts.jetstack.io
     condition: cert-manager.enabled
 annotations:
   artifacthub.io/category: security
   artifacthub.io/changes: |
-    - kind: fixed
-      description: Indexer host URL on Manager configuration file - removed quotation marks. Vulnerability Detection page is now working
+    - kind: changed
+      description: Update Wazuh to 4.11.0
+  artifacthub.io/containsSecurityUpdates: "true"
   artifacthub.io/links: |
     - name: application source
       url: https://github.com/wazuh/wazuh
