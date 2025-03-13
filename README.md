@@ -1,8 +1,8 @@
 # Wazuh Helm Chart
 
-![Version: 0.0.6](https://img.shields.io/badge/Version-0.0.6-informational?style=flat-square)
-![AppVersion: 4.11.0](https://img.shields.io/badge/AppVersion-4.11.0-informational?style=flat-square)
-[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/wazuh-helm)](https://artifacthub.io/packages/search?repo=wazuh-helm)
+![Version: 0.0.7](https://img.shields.io/badge/Version-0.0.7-informational?style=flat-square)
+![AppVersion: 4.11.1](https://img.shields.io/badge/AppVersion-4.11.1-informational?style=flat-square)
+[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/wazuh-helm)](https://artifacthub.io/packages/helm/wazuh-helm/wazuh)
 
 Wazuh is a free and open source security platform that unifies XDR and SIEM protection for endpoints and cloud workloads.
 
