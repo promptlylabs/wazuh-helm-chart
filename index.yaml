@@ -5,6 +5,56 @@ entries:
       artifacthub.io/category: security
       artifacthub.io/changes: |
         - kind: changed
+          description: Update Wazuh to 4.11.1
+      artifacthub.io/links: |
+        - name: application source
+          url: https://github.com/wazuh/wazuh
+        - name: kustomize source
+          url: https://github.com/wazuh/wazuh-kubernetes
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/screenshots: |-
+        - title: Home Page
+          url: https://promptlylabs.github.io/wazuh-helm-chart/images/dashboard.png
+        - title: Agent Deployment
+          url: https://promptlylabs.github.io/wazuh-helm-chart/images/agent-deploy.png
+        - title: Threat Hunting
+          url: https://promptlylabs.github.io/wazuh-helm-chart/images/threat-hunting.png
+    apiVersion: v2
+    appVersion: 4.11.1
+    created: "2025-03-13T16:00:20.863532902Z"
+    dependencies:
+    - condition: cert-manager.enabled
+      name: cert-manager
+      repository: https://charts.jetstack.io
+      version: 1.17.1
+    description: Wazuh is a free and open source security platform that unifies XDR
+      and SIEM protection for endpoints and cloud workloads.
+    digest: b024f290435aaa8846c86e7b66dd6902eb1de9dc614fa59d03491baa992f7958
+    home: https://wazuh.com/
+    icon: https://promptlylabs.github.io/wazuh-helm-chart/images/icon.png
+    keywords:
+    - security
+    - information
+    - threat
+    - management
+    - wazuh
+    - opendistro
+    - elasticsearch
+    maintainers:
+    - email: andre.gomes@promptlyhealth.com
+      name: Dani
+      url: https://github.com/Ca-moes
+    name: wazuh
+    sources:
+    - https://github.com/promptlylabs/wazuh-helm-chart
+    type: application
+    urls:
+    - https://github.com/promptlylabs/wazuh-helm-chart/releases/download/wazuh-0.0.7/wazuh-0.0.7.tgz
+    version: 0.0.7
+  - annotations:
+      artifacthub.io/category: security
+      artifacthub.io/changes: |
+        - kind: changed
           description: Update Wazuh to 4.11.0
       artifacthub.io/containsSecurityUpdates: "true"
       artifacthub.io/links: |
@@ -307,4 +357,4 @@ entries:
     urls:
     - https://github.com/promptlylabs/wazuh-helm-chart/releases/download/wazuh-0.0.1/wazuh-0.0.1.tgz
     version: 0.0.1
-generated: "2025-02-21T09:08:36.282733193Z"
+generated: "2025-03-13T16:00:20.863565342Z"
