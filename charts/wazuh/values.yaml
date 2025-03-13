@@ -205,10 +205,10 @@ wazuh:
 
     resources:
       limits:
-        memory: 1Gi
+        memory: 2Gi
       requests:
         cpu: 500m
-        memory: 512Mi
+        memory: 1Gi
     
     networkPolicy:
       enabled: true
@@ -253,10 +253,10 @@ wazuh:
 
     resources:
       limits:
-        memory: 1Gi
+        memory: 2Gi
       requests:
         cpu: 500m
-        memory: 512Mi
+        memory: 1Gi
     
     pdb:
       enabled: false
