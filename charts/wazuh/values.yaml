@@ -55,6 +55,8 @@ dashboard:
   
   config: |
     {{- include "wazuh.dashboard.config" . | indent 2 -}}
+  wazuh_config: |
+    {{- include "wazuh.dashboard.wazuh_config" . | indent 2 -}}
   
   ingress:
     enabled: false
