@@ -1,0 +1,19 @@
+name: Release Wazuh Chart
+on:
+  push:
+    branches-ignore:
+      - 'main'
+
+concurrency:
+  group: wazuh-chart
+  cancel-in-progress: true
+
+jobs:
+  release_helm:
+    uses: dBildungsplattform/dbp-github-workflows/.github/workflows/chart-release.yaml@7
+    secrets: inherit
+    with:
+      chart_name: wazuh
+      helm_repo_list: cert-manager,https://charts.jetstack.io
+      helm_chart_version_generation: ticket_from_branch_timestamp
+      image_tag_generation: ticket_from_branch
