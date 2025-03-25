@@ -99,7 +99,7 @@ spec:
             - name: SERVER_SSL_KEY
               value: /usr/share/wazuh-dashboard/certs/key.pem
             - name: WAZUH_API_URL
-              value: "https://wazuh"
+              value: {{ .Values.dashboard.apiURL }}
             - name: API_USERNAME
               valueFrom:
                 secretKeyRef:

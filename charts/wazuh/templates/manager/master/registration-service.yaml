@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  # Name is only "wazuh" because of Certicates commonName
+  name: wazuh-registration
+  labels:
+    app: {{ include "wazuh.fullname" . }}-manager
+    node-type: master
+  annotations:
+    {{- toYaml .Values.wazuh.master.registrationService.annotations | nindent 4 }}
+spec:
+  ports:
+    - name: registration
+      port: {{ .Values.wazuh.master.registrationService.port }}
+      targetPort: {{ .Values.wazuh.master.t }}
+  selector:
+    app: {{ include "wazuh.fullname" . }}-manager
+    node-type: master
+  type: {{ .Values.wazuh.master.registrationService.type }}
+  {{- if hasKey .Values.wazuh.master.registrationService "loadBalancerIP" }}
+  loadBalancerIP: {{ .Values.wazuh.master.registrationService.loadBalancerIP }}
+  {{- end -}}

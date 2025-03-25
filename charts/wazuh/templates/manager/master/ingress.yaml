@@ -43,7 +43,7 @@ spec:
               service:
                 name: wazuh
                 port:
-                  number: {{ $.Values.wazuh.master.service.ports.registration }}
+                  number: {{ $.Values.wazuh.master.registrationService.port }}
           {{- end }}
     {{- end }}
 {{- end -}}

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  # Name is only "wazuh" because of Certicates commonName
+  name: wazuh-api
+  labels:
+    app: {{ include "wazuh.fullname" . }}-manager
+    node-type: master
+  annotations:
+    {{- toYaml .Values.wazuh.master.apiService.annotations | nindent 4 }}
+spec:
+  ports:
+    - name: api
+      port: {{ .Values.wazuh.master.apiService.port }}
+      targetPort: {{ .Values.wazuh.master.apiService.port }}
+  selector:
+    app: {{ include "wazuh.fullname" . }}-manager
+    node-type: master
+  type: {{ .Values.wazuh.master.apiService.type }}

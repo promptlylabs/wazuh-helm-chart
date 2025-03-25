@@ -137,11 +137,11 @@ spec:
               mountPath: /var/lib/filebeat
               subPath: filebeat/var/lib/filebeat
           ports:
-            - containerPort: {{ .Values.wazuh.master.service.ports.registration }}
+            - containerPort: {{ .Values.wazuh.master.registrationService.port }}
               name: registration
             - containerPort: {{ .Values.wazuh.service.port }}
               name: cluster
-            - containerPort: {{ .Values.wazuh.master.service.ports.api }}
+            - containerPort: {{ .Values.wazuh.master.apiService.port }}
               name: api
           {{- /*
           # Will be implemented on Wazuh v5.0.0

@@ -333,7 +333,7 @@ uiSettings.overrides.defaultRoute: /app/wz-home
   -->
   <auth>
     <disabled>no</disabled>
-    <port>{{ .Values.wazuh.master.service.ports.registration }}</port>
+    <port>{{ .Values.wazuh.master.registrationService.port }}</port>
     <use_source_ip>no</use_source_ip>
     <force>
       <enabled>yes</enabled>
@@ -692,7 +692,7 @@ vulnerability-detection.disable_scan_manager=0
   -->
   <auth>
     <disabled>no</disabled>
-    <port>{{ .Values.wazuh.master.service.ports.registration }}</port>
+    <port>{{ .Values.wazuh.master.registrationService.port }}</port>
     <use_source_ip>no</use_source_ip>
     <force>
       <enabled>yes</enabled>

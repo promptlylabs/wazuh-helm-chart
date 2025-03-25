@@ -16,3 +16,6 @@ spec:
     app: {{ include "wazuh.fullname" . }}-manager
     node-type: worker
   type: {{ .Values.wazuh.worker.service.type }}
+  {{- if hasKey .Values.wazuh.worker.service "loadBalancerIP" }}
+  loadBalancerIP: {{ .Values.wazuh.worker.service.loadBalancerIP }}
+  {{- end -}}
