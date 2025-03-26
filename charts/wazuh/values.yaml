@@ -253,6 +253,11 @@ wazuh:
     localInternalOptions: |
       {{- include "wazuh.master.local_internal_options" . | indent 2 -}}
 
+    # Additional volumes for Pods
+    extraVolumes: []
+    # Additional volume mounts for Pods
+    extraVolumeMounts: []
+
   worker:
     replicas: 2
 

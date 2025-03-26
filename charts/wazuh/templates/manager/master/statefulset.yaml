@@ -44,6 +44,9 @@ spec:
             secretName: wazuh-authd-pass
         - name: result-config
           emptyDir: {}
+        {{- if .Values.wazuh.master.extraVolumes }}
+        {{ toYaml .Values.wazuh.master.extraVolumes | nindent 8 }}
+        {{- end }}
       {{ with .Values.imagePullSecrets -}}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -136,6 +139,9 @@ spec:
             - name: {{ include "wazuh.fullname" . }}-manager-master
               mountPath: /var/lib/filebeat
               subPath: filebeat/var/lib/filebeat
+            {{- if .Values.wazuh.master.extraVolumeMounts }}
+            {{ toYaml .Values.wazuh.master.extraVolumeMounts | nindent 12 }}
+            {{- end }}
           ports:
             - containerPort: {{ .Values.wazuh.master.registrationService.port }}
               name: registration
