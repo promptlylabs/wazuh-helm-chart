@@ -26,15 +26,15 @@ spec:
         node-type: master
       name: wazuh-manager-master
       annotations:
-        checksum/config: {{ (include (print .Template.BasePath "/manager/configmap.yaml") . | cat (include (print .Template.BasePath "/manager/secret-api-cred.yaml") . ) | cat (include (print .Template.BasePath "/manager/secret-authd-pass.yaml") . ) | cat (include (print .Template.BasePath "/manager/secret-cluster-key.yaml") . ) | sha256sum) }}
+        checksum/config: {{ (include (print .Template.BasePath "/manager/secret-config.yaml") . | cat (include (print .Template.BasePath "/manager/secret-api-cred.yaml") . ) | cat (include (print .Template.BasePath "/manager/secret-authd-pass.yaml") . ) | cat (include (print .Template.BasePath "/manager/secret-cluster-key.yaml") . ) | sha256sum) }}
         {{- with .Values.wazuh.master.podAnnotations }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
     spec:
       volumes:
         - name: config
-          configMap:
-            name: {{ template "wazuh.fullname" . }}-manager-config
+          secret:
+            secretName: {{ template "wazuh.fullname" . }}-manager-config
             defaultMode: 0777
         - name: filebeat-certs
           secret:
