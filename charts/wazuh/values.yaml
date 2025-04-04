@@ -55,8 +55,8 @@ dashboard:
   
   cred:
     existingSecret: ""
-    username: "kibanaserver"
-    password: "kibanaserver"
+    username: ""
+    password: ""
   
   config: |
     {{- include "wazuh.dashboard.config" . | indent 2 -}}
@@ -158,12 +158,12 @@ indexer:
 
   cred:
     existingSecret: ""
-    username: "admin"
-    password: "SecretPassword"    
+    username: ""
+    password: ""
 
 
 wazuh:
-  key: "c98b62a9b6169ac5f67dae55ae4a9088"
+  key: ""
   images:
     repository: wazuh/wazuh-manager
     tag: "4.11.1"
@@ -187,12 +187,12 @@ wazuh:
     existingSecret: ""
     username: "wazuh-wui"
     # The password must have a length between 8 and 64 characters and contain at least one upper and lower case letter, a number, and a symbol(.*+?-).
-    password: "MyS3cr37P450r.*-"
+    password: ""
   authd:
     existingSecret: ""
     # Key in Kubernetes-Secret
     existingSecretKey: ""
-    pass: "password"
+    pass: ""
   
   initContainer:
     resources: 
