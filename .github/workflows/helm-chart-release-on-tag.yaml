@@ -1,0 +1,24 @@
+name: Release Wazuh Chart
+on:
+  push:
+    tags:
+      - 'wazuh-[0-9]+.[0-9]+.[0-9]+'
+
+concurrency:
+  group: wazuh-chart
+  cancel-in-progress: true
+
+jobs:
+  scan:
+    uses: dBildungsplattform/dbp-github-workflows/.github/workflows/check-helm-kics.yaml@7
+    permissions:
+      contents: read
+  release_helm:
+    needs: scan
+    uses: dBildungsplattform/dbp-github-workflows/.github/workflows/chart-release.yaml@7
+    secrets: inherit
+    with:
+      chart_name: wazuh
+      helm_chart_version_generation: chart_yaml
+      image_tag_generation: chart_yaml
+      helm_repo_list: cert-manager,https://charts.jetstack.io
