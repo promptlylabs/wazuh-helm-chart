@@ -190,6 +190,8 @@ wazuh:
     password: "MyS3cr37P450r.*-"
   authd:
     existingSecret: ""
+    # Key in Kubernetes-Secret
+    existingSecretKey: ""
     pass: "password"
   
   initContainer:

@@ -103,7 +103,7 @@ spec:
             # Authd pass
             - name: wazuh-authd-pass
               mountPath: /wazuh-config-mount/etc/authd.pass
-              subPath: authd.pass
+              subPath: {{ .Values.wazuh.authd.existingSecretKey | default "authd.pass" }}
               readOnly: true
             # PVC
             - name: {{ include "wazuh.fullname" . }}-manager-master
