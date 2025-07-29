@@ -378,6 +378,21 @@ uiSettings.overrides.defaultRoute: /app/wz-home
     <location>/var/log/dpkg.log</location>
   </localfile>
 
+  <github>
+    <enabled>yes</enabled>
+    <interval>1m</interval>
+    <time_delay>1m</time_delay>
+    <curl_max_size>1M</curl_max_size>
+    <only_future_events>yes</only_future_events>
+    <api_auth>
+      <org_name>promptlylabs</org_name>
+      <api_token>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</api_token>
+    </api_auth>
+    <api_parameters>
+      <event_type>all</event_type>
+    </api_parameters>
+  </github>
+
   {{- if .Values.wazuh.master.extraConf }}
   {{ .Values.wazuh.master.extraConf | indent 2 }}
   {{- end }}
