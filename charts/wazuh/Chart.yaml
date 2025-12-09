@@ -3,7 +3,7 @@ name: wazuh
 description: Wazuh is a free and open source security platform that unifies XDR and SIEM protection for endpoints and cloud workloads.
 type: application
 appVersion: 4.11.1
-version: 0.0.7
+version: 0.0.8
 home: https://wazuh.com/
 sources:
   - https://github.com/promptlylabs/wazuh-helm-chart
@@ -28,8 +28,8 @@ dependencies:
 annotations:
   artifacthub.io/category: security
   artifacthub.io/changes: |
-    - kind: changed
-      description: Update Wazuh to 4.11.1
+    - kind: deprecated
+      description: "This chart is no longer maintained. Please migrate to Morgoved's Wazuh Helm Chart: https://artifacthub.io/packages/helm/wazuh-helm-morgoved/wazuh"
   # artifacthub.io/containsSecurityUpdates: "true"
   artifacthub.io/links: |
     - name: application source

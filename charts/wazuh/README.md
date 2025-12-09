@@ -1,7 +1,18 @@
 # Wazuh Helm Chart
 
-![Version: 0.0.7](https://img.shields.io/badge/Version-0.0.7-informational?style=flat-square)
+> **⚠️ DEPRECATED - This chart is no longer maintained**
+>
+> This Helm chart has been officially deprecated as of version 0.0.8 and is no longer maintained. This repository has been archived and is read-only.
+>
+> **Please migrate to [Morgoved's Wazuh Helm Chart](https://artifacthub.io/packages/helm/wazuh-helm-morgoved/wazuh)** for continued Wazuh support on Kubernetes.
+>
+> See [DEPRECATION.md](../../DEPRECATION.md) for full details and migration guidance.
+
+---
+
+![Version: 0.0.8](https://img.shields.io/badge/Version-0.0.8-red?style=flat-square)
 ![AppVersion: 4.11.1](https://img.shields.io/badge/AppVersion-4.11.1-informational?style=flat-square)
+![Status: Deprecated](https://img.shields.io/badge/Status-Deprecated-red?style=flat-square)
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/wazuh-helm)](https://artifacthub.io/packages/helm/wazuh-helm/wazuh)
 
 Wazuh is a free and open source security platform that unifies XDR and SIEM protection for endpoints and cloud workloads.
@@ -70,6 +81,12 @@ dashboard:
     ...
 ```
 
-## Contributing
+## Migration & Support
 
-Feel free to contact the maintainer of this repository for any questions or concerns. Contributions are encouraged and appreciated.
+This chart is deprecated and the repository is archived. For questions about migrating to alternative solutions:
+
+- **Recommended Alternative**: [Morgoved's Wazuh Helm Chart](https://artifacthub.io/packages/helm/wazuh-helm-morgoved/wazuh)
+- **Official Kubernetes Deployment**: [Wazuh Kubernetes](https://github.com/wazuh/wazuh-kubernetes)
+- **Migration Guide**: See [DEPRECATION.md](../../DEPRECATION.md)
+
+You can still fork this repository if you wish to maintain it independently.
