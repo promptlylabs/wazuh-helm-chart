@@ -9,3 +9,5 @@ metadata:
 data:
   opensearch_dashboards.yml: |
     {{- tpl .Values.dashboard.config . | indent 2 }}
+  wazuh.yml: |
+    {{- tpl .Values.dashboard.wazuh_config . | indent 2 }}

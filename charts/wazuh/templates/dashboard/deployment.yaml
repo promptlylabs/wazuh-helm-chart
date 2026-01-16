@@ -48,6 +48,10 @@ spec:
               name: config
               readOnly: false
               subPath: opensearch_dashboards.yml
+            - mountPath: /usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml
+              name: config
+              readOnly: false
+              subPath: wazuh.yml
             # Certs
             - mountPath: /usr/share/wazuh-dashboard/certs/cert.pem
               name: dashboard-certs
